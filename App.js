@@ -5,6 +5,7 @@ import { StyleSheet, ImageBackground, SafeAreaView } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useState } from "react";
 import Colors from "./constants/Colors";
+import { StatusBar } from "expo-status-bar";
 
 export default function App() {
   const [userNumber, setUserNumber] = useState();
@@ -36,23 +37,26 @@ export default function App() {
     );
   }
 
-	return (
-		<LinearGradient
-			colors={[Colors.primary700, Colors.accent500]}
-			style={styles.rootScreen}
-		>
-			<ImageBackground
-				source={require("./assets/images/background.png")}
-				resizeMode="cover"
+  return (
+		<>
+			<StatusBar style="light" />
+			<LinearGradient
+				colors={[Colors.primary700, Colors.accent500]}
 				style={styles.rootScreen}
-				imageStyle={{ opacity: 0.15 }}
 			>
-				<SafeAreaView style={styles.rootScreen}>
-          {screen}
-        </SafeAreaView>
-			</ImageBackground>
-		</LinearGradient>
-	);
+				<ImageBackground
+					source={require("./assets/images/background.png")}
+					resizeMode="cover"
+					style={styles.rootScreen}
+					imageStyle={{ opacity: 0.15 }}
+				>
+					<SafeAreaView style={styles.rootScreen}>
+						{screen}
+					</SafeAreaView>
+				</ImageBackground>
+			</LinearGradient>
+		</>
+  );
 }
 
 const styles = StyleSheet.create({
