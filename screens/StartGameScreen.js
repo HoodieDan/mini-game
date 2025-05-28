@@ -1,6 +1,10 @@
 import { TextInput, View, StyleSheet, Alert } from "react-native";
 import { useState } from "react";
-import PrimaryButton from "../components/PrimaryButton";
+import PrimaryButton from "../components/ui/PrimaryButton";
+import InstructionText from "../components/ui/InstructionText";
+import Card from "../components/ui/Card";
+import Colors from "../constants/Colors";
+import Title from "../components/ui/Title";
 
 function StartGameScreen({ onPickNumber }) {
 	const [enteredNumber, setEnteredNumber] = useState("");
@@ -35,26 +39,30 @@ function StartGameScreen({ onPickNumber }) {
 	};
 
 	return (
-		<View style={styles.inputContainer}>
-			<TextInput
-				keyboardType="number-pad"
-				maxLength={2}
-				style={styles.numberInput}
-				value={enteredNumber}
-				onChangeText={numberInputHandler}
-			/>
-			<View style={styles.buttonsContainer}>
-				<View style={styles.buttonContainer}>
-					<PrimaryButton onPress={resetInputHandler}>
-						Reset
-					</PrimaryButton>
+		<View style={styles.rootContainer}>
+			<Title>Guess My Number</Title>
+			<Card>
+				<InstructionText>Enter a number</InstructionText>
+				<TextInput
+					keyboardType="number-pad"
+					maxLength={2}
+					style={styles.numberInput}
+					value={enteredNumber}
+					onChangeText={numberInputHandler}
+				/>
+				<View style={styles.buttonsContainer}>
+					<View style={styles.buttonContainer}>
+						<PrimaryButton onPress={resetInputHandler}>
+							Reset
+						</PrimaryButton>
+					</View>
+					<View style={styles.buttonContainer}>
+						<PrimaryButton onPress={confirmInputHandler}>
+							Confirm
+						</PrimaryButton>
+					</View>
 				</View>
-				<View style={styles.buttonContainer}>
-					<PrimaryButton onPress={confirmInputHandler}>
-						Confirm
-					</PrimaryButton>
-				</View>
-			</View>
+			</Card>
 		</View>
 	);
 }
@@ -62,24 +70,16 @@ function StartGameScreen({ onPickNumber }) {
 export default StartGameScreen;
 
 const styles = StyleSheet.create({
-	inputContainer: {
+	rootContainer: {
+		flex: 1,
 		marginTop: 100,
-		marginHorizontal: 24,
-		padding: 16,
-		backgroundColor: "#4e0329",
-		borderRadius: 8,
-		elevation: 4,
-		shadowColor: "black",
-		shadowOffset: { width: 0, height: 2 },
-		shadowRadius: 6,
-		shadowOpacity: 0.25,
 		alignItems: "center",
 	},
 	numberInput: {
 		height: 50,
 		width: 50,
-		borderBottomColor: "#ddb52f",
-		color: "#ddb52f",
+		borderBottomColor: Colors.accent500,
+		color: Colors.accent500,
 		borderBottomWidth: 2,
 		marginVertical: 8,
 		textAlign: "center",
